@@ -7,8 +7,20 @@ import numpy as np
 from PIL import Image
 import os
 import geopandas as gpd
-from food_data import create_points_df
 
+def create_points_df(farmers_markets, garden_sites):
+    farmers_markets = farmers_markets[farmers_markets['Market Name'] != 'Saratoga Farm Stand']
+    farmers_markets['loc_type'] = 'Farmers market'
+    farmers_markets = farmers_markets[['Latitude', 'Longitude', 'Borough', 'loc_type']]
+    farmers_markets = farmers_markets.rename(columns = {'Borough': 'borough', 'Latitude': 'lat', 'Longitude': 'long'})
+
+    garden_sites['lat'] = garden_sites.centroid.y
+    garden_sites['long'] = garden_sites.centroid.x
+    garden_sites['loc_type'] = 'Community garden'
+    garden_sites = garden_sites[['lat', 'long', 'borough', 'loc_type']] 
+
+    points_df = pd.concat([farmers_markets, garden_sites], axis = 0)
+    return points_df
 # Load the data from vega_datasets
 gdf = gpd.read_file("~/Downloads/si618wn23-main/data/census_tracts_2010/geo_export_15e54104-230b-46ff-831d-f8f2bcaa8f59.shp")
 
