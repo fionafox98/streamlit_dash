@@ -419,7 +419,7 @@ import streamlit.components.v1 as components
 
 
 
-HtmlFile = open("plot_plot_plot.html", 'r', encoding='utf-8')
+HtmlFile = open("food_plot.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
 image2 = Image.open('bivariate_map_final.png')
 
