@@ -445,7 +445,7 @@ with tab1:
     st.image(image)
 with tab2:
     components.html(source_code,height = 400,width=10000)
-    st.caption("Farmers markets and community gardens provide neighborhoods with access to fresh, healthy produce. Unfortunately, many New Yorkers don’t have access to them. Farmers market and community garden tend to generally be located in more walkable neighborhoods. Some of these neighborhoods have a high proportion of residents receiving Supplemental Nutrition Assistance Program (STAP) benefits, but many parts of New York City with high levels of food insecurity are far away from farmers markets and community gardens. Having access to fresh food in the places people live is an important part of creating equitable and adaptable food systems.")
+    st.caption("Farmers markets and community gardens provide neighborhoods with access to fresh, healthy produce. Unfortunately, many New Yorkers don’t have access to them. Farmers market and community garden tend to generally be located in more walkable neighborhoods. Some of these neighborhoods have a high proportion of residents receiving Supplemental Nutrition Assistance Program (SNAP) benefits, but many parts of New York City with high levels of food insecurity are far away from farmers markets and community gardens. Having access to fresh food in the places people live is an important part of creating equitable and adaptable food systems.")
 with tab4:
     st.image(image2)
 
