@@ -1,1 +1,1 @@
-geopandas==1.16.0
+geopandas
