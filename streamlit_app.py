@@ -420,7 +420,7 @@ source_code = HtmlFile.read()
 image2 = Image.open('bivariate_map_final.png')
 
     
-tab2, tab3, tab1, tab4 = st.tabs(['Walkability Score and Food Access','Housing Prices', 'Walkability in Borough Park', 'Bivariate Map of Walkability and Housing Prices'])
+tab1, tab2, tab3, tab4 = st.tabs(['Walkability in Borough Park','Walkability Score and Food Access', 'Housing Prices', 'Bivariate Map of Walkability and Housing Prices'])
 
 
 
