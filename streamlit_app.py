@@ -22,14 +22,14 @@ def create_points_df(farmers_markets, garden_sites):
     points_df = pd.concat([farmers_markets, garden_sites], axis = 0)
     return points_df
 # Load the data from vega_datasets
-gdf = gpd.read_file("~/Downloads/si618wn23-main/data/census_tracts_2010/geo_export_15e54104-230b-46ff-831d-f8f2bcaa8f59.shp")
+gdf = gpd.read_file("/data/census_tracts_2010/geo_export_15e54104-230b-46ff-831d-f8f2bcaa8f59.shp")
 
-grouped_food_df = pd.read_csv("~/Downloads/si618wn23-main/data/food_security_by_tract.csv")
-grouped_walk_df = pd.read_csv("~/Downloads/si618wn23-main/data/walkability_by_tract.csv")
-cd = gpd.read_file("~/Downloads/si618wn23-main/data/community_districts/geo_export_7b678860-455d-4c2b-8175-8482e297e882.shp")
+grouped_food_df = pd.read_csv("/data/food_security_by_tract.csv")
+grouped_walk_df = pd.read_csv("/data/walkability_by_tract.csv")
+cd = gpd.read_file("/data/community_districts/geo_export_7b678860-455d-4c2b-8175-8482e297e882.shp")
 
-farmers_markets = pd.read_csv("~/Downloads/si618wn23-main/data/point_data/DOHMH_Farmers_Markets.csv")
-garden_sites = gpd.read_file("~/Downloads/si618wn23-main/data/community_gardens/geo_export_719c88a3-5724-4f23-b587-e754c0844c6d.shp")
+farmers_markets = pd.read_csv("/data/point_data/DOHMH_Farmers_Markets.csv")
+garden_sites = gpd.read_file("/data/community_gardens/geo_export_719c88a3-5724-4f23-b587-e754c0844c6d.shp")
 points_df = create_points_df(farmers_markets, garden_sites)
 df_2022_bronx=pd.read_csv("https://raw.githubusercontent.com/ChenzwNina/final_project_649/main/2022_bronx.csv")
 df_2022_brooklyn=pd.read_csv("https://raw.githubusercontent.com/ChenzwNina/final_project_649/main/2022_brooklyn.csv")
