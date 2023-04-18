@@ -417,9 +417,10 @@ import streamlit.components.v1 as components
 
 HtmlFile = open("plot_plot_plot.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
+image2 = Image.open('bivariate_map_final.png')
 
     
-tab1, tab2, tab3 = st.tabs(['Walkability Score and Food Access','Housing Prices', 'Walkability in Borough Park'])
+tab2, tab3, tab1, tab4 = st.tabs(['Walkability Score and Food Access','Housing Prices', 'Walkability in Borough Park', 'Bivariate Map of Walkability and Housing Prices'])
 
 
 
@@ -428,7 +429,7 @@ tab1, tab2, tab3 = st.tabs(['Walkability Score and Food Access','Housing Prices'
 
 
 # Display the chart with a different theme on each tab
-with tab2:
+with tab3:
     st.altair_chart(chart, theme=None)
     st.caption(
         """
@@ -436,10 +437,11 @@ with tab2:
 
         Possible Explanation: The pandemic had a significant impact on the housing market, particularly in densely populated urban areas like Manhattan.  As remote work gained traction during the pandemic, many employees realized that they no longer needed to live close to their workplace. As a result, some Manhattan residents relocated to less expensive areas in the other four districts. This increased demand led to a rise in housing prices in those areas
         """)
-with tab3:
-    st.image(image)
 with tab1:
+    st.image(image)
+with tab2:
     components.html(source_code,height = 400,width=10000)
     st.caption("Farmers markets and community gardens provide neighborhoods with access to fresh, healthy produce. Unfortunately, many New Yorkers don’t have access to them. Farmers market and community garden tend to generally be located in more walkable neighborhoods. Some of these neighborhoods have a high proportion of residents receiving Supplemental Nutrition Assistance Program (STAP) benefits, but many parts of New York City with high levels of food insecurity are far away from farmers markets and community gardens. Having access to fresh food in the places people live is an important part of creating equitable and adaptable food systems.")
-
+with tab4:
+    st.image(image2)
 
