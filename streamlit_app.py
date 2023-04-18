@@ -413,70 +413,8 @@ chart = alt.vconcat(chart1, chart2).resolve_scale(y="shared")
 
 
 
-def generate_plots(grouped_food_df, grouped_walk_df, points_df, gdf, color_palette = ['#3877eb', '#38eb38']):
-    #select types of locations
-    radio_options = list(points_df['loc_type'].unique()) 
-    radio_labels = list(points_df['loc_type'].unique())
-
-    input_dropdown = alt.binding_radio(
-        options = [None] + radio_options + [f'~({radio_options[0]}&{radio_options[1]})'],
-        labels =  ['All'] + radio_labels + ['None'],
-        name = 'Location Type: '
-    )
-    loc_selection = alt.selection_single(fields = ['loc_type'], bind = input_dropdown)
 
 
-    ct_base = alt.Chart(gdf).mark_geoshape(color = '#ebebeb').encode()
-
-    walkability = alt.Chart(gdf).mark_geoshape().transform_lookup(
-        lookup = 'ct2010', 
-        from_ = alt.LookupData(data = grouped_walk_df, key = 'ct2010', 
-                            fields = ['D3A', 'Pct_AO0', 'NatWalkInd', 'ct2010'])
-    ).encode(
-        color = alt.Color('NatWalkInd:Q', scale = alt.Scale(scheme = 'plasma', reverse = True, domain = [5, 20]), 
-                        legend = alt.Legend(title = 'Walkability Score')), 
-        tooltip = [alt.Tooltip('NatWalkInd:Q', title = 'Walkability Score', format = '.2f')]
-    )
-
-    points = alt.Chart(points_df).add_selection(loc_selection).mark_circle(
-        size = 30, 
-        opacity = 0.6
-    ).encode(
-        latitude = 'lat:Q', 
-        longitude = 'long:Q', 
-        color = alt.Color('loc_type:N', legend = alt.Legend(title = 'Location Type'), 
-                        scale = alt.Scale(range = color_palette)), 
-        tooltip = [alt.Tooltip('loc_type:N', title = 'Location Type')]
-    ).transform_filter(
-        loc_selection
-    )
-
-    side_1 = alt.layer(ct_base, walkability, points).properties(height = 350, width = 350)
-
-
-    snap_layer = alt.Chart(gdf).mark_geoshape().transform_lookup(
-        lookup = 'ct2010', 
-        from_ = alt.LookupData(data = grouped_food_df, key = 'ct2010', 
-                            fields = ['snap_pct_median', 'ct2010'])
-    ).encode(
-        color = alt.Color('snap_pct_median:Q', scale = alt.Scale(scheme = 'plasma', reverse = True), 
-                        legend = alt.Legend(title = 'Percent of resident receiving SNAP benefits', format = '0%')), 
-        tooltip = [alt.Tooltip('snap_pct_median:Q', title = 'Percent on SNAP', format = '.2%')]
-    )
-
-    side_2 = alt.layer(ct_base, snap_layer, points)
-
-
-    final = alt.hconcat(side_1, side_2).properties(title = alt.TitleParams('Commmunity gardens and farmers markets are in more walkable neighborhoods', 
-                                                               subtitle = "These are not necessarily the areas with the higher rates of food insecurity, where residents need access to fresh food", 
-                                                               fontSize = 25, 
-                                                               subtitleFontSize = 15))
-    return final
-
-points_df = create_points_df(farmers_markets, garden_sites)
-
-
-plot = generate_plots(grouped_food_df, grouped_walk_df, points_df, gdf)
 import streamlit.components.v1 as components
 
 
@@ -506,8 +444,7 @@ with tab3:
 with tab1:
     st.image(image)
 with tab2:
-    st.altair_chart(plot, theme=None)
-    #components.html(source_code,height = 400,width=10000)
+    components.html(source_code,height = 400,width=10000)
     st.caption("Farmers markets and community gardens provide neighborhoods with access to fresh, healthy produce. Unfortunately, many New Yorkers don’t have access to them. Farmers market and community garden tend to generally be located in more walkable neighborhoods. Some of these neighborhoods have a high proportion of residents receiving Supplemental Nutrition Assistance Program (STAP) benefits, but many parts of New York City with high levels of food insecurity are far away from farmers markets and community gardens. Having access to fresh food in the places people live is an important part of creating equitable and adaptable food systems.")
 with tab4:
     st.image(image2)
