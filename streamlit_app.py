@@ -342,7 +342,7 @@ data = [['bronx','2022', df_bronx_price_2022, df_bronx_price_2022_75, df_bronx_p
 df1 = pd.DataFrame(data, columns=['district','year','price','75_percentile','25_percentile'])
 
 
-image = Image.open('Walk.jpg')
+image = Image.open('Park.png')
 # Add some text
 
 st.sidebar.title("About")
